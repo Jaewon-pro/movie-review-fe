@@ -3,9 +3,11 @@ import '../components/App.css';
 import React from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
-// import Main from "./Main";
+import Main from "./Main";
 import Login from "./Login";
 import NotFound from "./NotFound";
+import Register from './Register';
+import Movie from './Movie';
 
 function App() {
   return (
@@ -14,11 +16,15 @@ function App() {
         <p> heell</p>
       </header>
       <BrowserRouter>
-      <Link to="/login">Login</Link>
+      <Link to="/login"><p>Login</p></Link>
+      <Link to="/register">Sign Up</Link>
 
         <Routes>
-          {/* <Route path="/" element={<Main />} /> */}
+          <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/movie" element={<Movie />} />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
