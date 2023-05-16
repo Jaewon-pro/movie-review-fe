@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 //import axios from 'axios';
 import { authApi } from '../lib/axios';
  
@@ -37,7 +37,7 @@ function Register() {
     .catch((response) => { console.log(response) });
   }
   return(
-    <div>
+    <div className='register-home'>
       <h2>Register</h2>
       <div>
         <label htmlFor='email'>Email : </label>
@@ -57,5 +57,5 @@ function Register() {
     </div>
   );
 }
- 
+
 export default Register;

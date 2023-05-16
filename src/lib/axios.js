@@ -7,4 +7,14 @@ export const authApi = axios.create({
   //withCredentials: true,
 });
 
+export const movieApi = axios.create({
+  baseURL: BASE_URL+"/movies",
+  //withCredentials: true,
+});
+
+export const reviewApi = axios.create({
+  baseURL: BASE_URL+"/reviews",
+  //withCredentials: true,
+});
+
 authApi.defaults.headers.common["Content-Type"] = "application/json";

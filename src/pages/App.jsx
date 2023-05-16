@@ -23,7 +23,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/movie" element={<Movie />} />
+          <Route path="/movie/:imdbId" element={<Movie />} />
           
           <Route path="*" element={<NotFound />} />
         </Routes>
