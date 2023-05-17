@@ -1,42 +1,35 @@
 import React, { useState } from 'react';
-//import axios from 'axios';
-import { authApi } from '../lib/axios';
- 
+import axiosInstance from '../lib/axios';
+
 function Register() {
   const [inputUsername, setInputUsername] = useState('');
   const [inputEmail, setInputId] = useState('');
   const [inputPassword, setInputPw] = useState('');
- 
+
 	const handleInputUsername = (e) => {
     setInputUsername(e.target.value);
   }
   const handleInputId = (e) => {
     setInputId(e.target.value);
   }
- 
+
   const handleInputPw = (e) => {
     setInputPw(e.target.value);
   }
- 
+
   const onClickSignUp = () => {
     console.log('onClickSignUp');
-    authApi.post('/signup',
+    axiosInstance.post('/auth/signup',
     {
       username: inputUsername,
       email: inputEmail,
       password: inputPassword
-    },
-    {
-      headers:{
-        "Access-Control-Allow-Origin": "*",
-        'Content-type': 'application/json', 
-        'Accept': 'application/json' 
-      }
     })
     .then((response) => { console.log(response.data); }) 
     .catch((response) => { console.log(response) });
   }
-  return(
+
+  return (
     <div className='register-home'>
       <h2>Register</h2>
       <div>

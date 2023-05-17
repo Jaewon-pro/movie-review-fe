@@ -1,13 +1,27 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { movieApi, reviewApi } from '../lib/axios';
+import axiosInstance from '../lib/axios';
+//import setAuthorizationToken from '../api/setAuthorization';
 import "../components/Movie.css";
 
 function Movie() {
   const { imdbId } = useParams();
   const [inputReviewBody, setInputReviewBody] = useState('');
   const [inputRating, setInputRating] = useState('');
+  const [movie, setMovie] = useState('');
 
+  if (!movie) {
+    axiosInstance
+    .get('/movies/' + imdbId)
+    .then(function(response) {
+      setMovie(response.data);
+      console.log("성공");
+    })
+    .catch(function(error) {
+      console.log("실패"+error);
+    })
+  }
+  
   const handleInputReviewBody = (e) => {
     setInputReviewBody(e.target.value);
   }
@@ -25,15 +39,21 @@ function Movie() {
       "imdbId": imdbId
     };
 
-    reviewApi
-      .post('/', body)
+    axiosInstance
+      .post('/reviews', body)
       .then((res) => console.log(res))
       .catch((res) => { console.log(res) });
   };
+
   return (
     <div className='movie-info'>
       <div className="movie-header">
-        <h2>영화 제목</h2>
+        <h2>
+          {
+            movie
+            ? movie.title
+            : "영화 제목"
+        }</h2>
         <img ></img>
         <span>설명</span>
       </div>

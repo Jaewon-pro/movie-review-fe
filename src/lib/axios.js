@@ -2,19 +2,14 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:8080/api/v1";
 
-export const authApi = axios.create({
-  baseURL: BASE_URL+"/auth",
-  //withCredentials: true,
-});
+const axiosInstance = axios.create({
+  baseURL: BASE_URL
+})
 
-export const movieApi = axios.create({
-  baseURL: BASE_URL+"/movies",
-  //withCredentials: true,
-});
+axiosInstance.defaults.headers.common["Content-Type"] = "application/json";
+axiosInstance.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+axiosInstance.defaults.headers.common["Accept"] = "application/json";
+// "Access-Control-Allow-Origin": "*",
+// 'Accept': 'application/json' 
 
-export const reviewApi = axios.create({
-  baseURL: BASE_URL+"/reviews",
-  //withCredentials: true,
-});
-
-authApi.defaults.headers.common["Content-Type"] = "application/json";
+export default axiosInstance;
