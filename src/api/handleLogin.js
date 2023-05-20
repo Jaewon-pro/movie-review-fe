@@ -2,7 +2,7 @@ import setAuthorizationToken from './setAuthorization'
 import axiosInstance from "../lib/axios";
 
 const handleLogin = (email, password) => {
-  //axios.post('http://localhost:8080/api/v1/auth/login', // 'http://localhost:8080/api/v1/auth/login'
+  
   axiosInstance.post('/auth/login',
   {
     email: email,

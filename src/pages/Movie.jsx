@@ -1,26 +1,31 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axiosInstance from '../lib/axios';
-//import setAuthorizationToken from '../api/setAuthorization';
+
 import "../components/Movie.css";
 
 function Movie() {
   const { imdbId } = useParams();
+  const navigate = useNavigate();
   const [inputReviewBody, setInputReviewBody] = useState('');
   const [inputRating, setInputRating] = useState('');
   const [movie, setMovie] = useState('');
 
-  if (!movie) {
-    axiosInstance
-    .get('/movies/' + imdbId)
-    .then(function(response) {
-      setMovie(response.data);
-      console.log("성공");
-    })
-    .catch(function(error) {
-      console.log("실패"+error);
-    })
-  }
+  useEffect(() => {
+    if (!movie) {
+      axiosInstance
+      .get(`/movies/${imdbId}`)
+      .then(function(response) {
+        setMovie(response.data);
+        console.log("성공");
+      })
+      .catch(function(error) {
+        navigate("/");
+        alert("올바르지 않은 접근입니다.");
+        console.log("실패"+error);
+      })
+    }
+  })
   
   const handleInputReviewBody = (e) => {
     setInputReviewBody(e.target.value);
@@ -48,14 +53,9 @@ function Movie() {
   return (
     <div className='movie-info'>
       <div className="movie-header">
-        <h2>
-          {
-            movie
-            ? movie.title
-            : "영화 제목"
-        }</h2>
-        <img ></img>
-        <span>설명</span>
+        <h2>{movie.title}</h2>
+        <img src={movie.poster}></img>
+        <span>{movie.genres}</span>
       </div>
 
       <form className='review' onSubmit={submitHandler}>
