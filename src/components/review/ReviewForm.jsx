@@ -4,18 +4,29 @@ import axiosInstance from '../../lib/axios';
 export default function ReviewForm({imdbId}) {
   const [inputReviewBody, setInputReviewBody] = useState('');
   const [inputRating, setInputRating] = useState('');
-  
+
   const handleInputReviewBody = (e) => { setInputReviewBody(e.target.value); }
   const handleRatingChange = (e) => { setInputRating(e.target.value); }
 
   const submitHandler = (e) => {
     e.preventDefault();
 
+    if (inputReviewBody.length === 0) {
+      alert("리뷰를 입력해주세요");
+      return;
+    }
+    if (inputRating <= 0) {
+      alert(`${inputRating}은 올바른 평가 점수가 이닙니다! (1~10)`);
+      return;
+    }
+
     const body = {
       "reviewBody": inputReviewBody,
       "rating": inputRating * 2, // 10점 만점
       "imdbId": imdbId
     };
+
+    console.log(body);
 
     axiosInstance
       .post('/reviews', body)
