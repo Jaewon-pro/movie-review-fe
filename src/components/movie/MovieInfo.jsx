@@ -1,5 +1,5 @@
-import "./MovieInfo.css";
 import React from 'react';
+import "./MovieInfo.css";
 
 export default function MovieInfo({title, poster, genres}) {
 
@@ -7,7 +7,7 @@ export default function MovieInfo({title, poster, genres}) {
     <div className='movie-info'>
       <div className="movie-header">
         <h2>{title}</h2>
-        <img src={poster}></img>
+        <img src={poster} alt="movie poster"></img>
         <span>{genres}</span>
       </div>
     </div>

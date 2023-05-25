@@ -1,9 +1,9 @@
-import setAuthorizationToken from './setAuthorization'
+import setAuthorizationToken from './setAuthorization';
 import axiosInstance from "../lib/axios";
 
-const handleLogin = (email, password) => {
+const handleLogin = async (email, password) => {
   
-  axiosInstance.post('/auth/login',
+  return axiosInstance.post('/auth/login',
   {
     email: email,
     password: password
@@ -13,8 +13,13 @@ const handleLogin = (email, password) => {
     const type = response.data.type;
     const accessToken = response.data.accessToken;
     setAuthorizationToken(type, accessToken);
+    sessionStorage.setItem('username', response.data.username);
+    return true;
   })
-  .catch((response) => { console.log(response) });
+  .catch((response) => {
+    console.log(response);
+    return false;
+  });
 }
 
 export default handleLogin;

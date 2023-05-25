@@ -1,7 +1,24 @@
 import React, { useState } from 'react';
 import axiosInstance from '../../lib/axios';
 
-export default function ReviewForm({imdbId}) {
+function ReviewStar({ maxCount }) {
+  return (
+    Array(maxCount).fill(<span className="icon">★</span>)
+  );
+}
+
+function ReviewStarLabel({ onChangeRating }) {
+  const myArray = [...Array(5)].map((_, index) => index + 1); // 1, 2, .. 5
+  const renderArrayElements = myArray.map((element, index) => (
+    <label key={index}>
+      <input type="radio" name="stars" value={element} onChange={onChangeRating}/>
+      <ReviewStar key={index} maxCount={element} />
+    </label>
+  ));
+  return <>{renderArrayElements}</>;
+}
+
+export default function ReviewForm({ imdbId }) {
   const [inputReviewBody, setInputReviewBody] = useState('');
   const [inputRating, setInputRating] = useState('');
 
@@ -26,47 +43,18 @@ export default function ReviewForm({imdbId}) {
       "imdbId": imdbId
     };
 
-    console.log(body);
-
     axiosInstance
       .post('/reviews', body)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res)
+      })
       .catch((res) => { console.log(res) });
   }
 
   return (
     <form className='review' onSubmit={submitHandler}>
-    <div className="rating">
-      <label>
-        <input type="radio" name="stars" value="1" onChange={handleRatingChange}/>
-        <span className="icon">★</span>
-      </label>
-      <label>
-        <input type="radio" name="stars" value="2" onChange={handleRatingChange}/>
-        <span className="icon">★</span>
-        <span className="icon">★</span>
-      </label>
-      <label>
-        <input type="radio" name="stars" value="3" onChange={handleRatingChange}/>
-        <span className="icon">★</span>
-        <span className="icon">★</span>
-        <span className="icon">★</span>   
-      </label>
-      <label>
-        <input type="radio" name="stars" value="4" onChange={handleRatingChange}/>
-        <span className="icon">★</span>
-        <span className="icon">★</span>
-        <span className="icon">★</span>
-        <span className="icon">★</span>
-      </label>
-      <label>
-        <input type="radio" name="stars" value="5" onChange={handleRatingChange}/>
-        <span className="icon">★</span>
-        <span className="icon">★</span>
-        <span className="icon">★</span>
-        <span className="icon">★</span>
-        <span className="icon">★</span>
-      </label>
+    <div className='rating'>
+      <ReviewStarLabel onChangeRating={handleRatingChange}/>
     </div>
     <div className='review-body'>
       <table>

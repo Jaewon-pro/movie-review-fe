@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import handleLogin from '../../api/handleLogin';
 
 export default function Login() {
   const [inputEmail, setInputId] = useState('');
   const [inputPassword, setInputPw] = useState('');
+  const navigate = useNavigate();
 
   const handleInputId = (e) => { setInputId(e.target.value); }
   const handleInputPw = (e) => { setInputPw(e.target.value); }
-  const onClickLogin = () => { handleLogin(inputEmail, inputPassword); }
+  const onClickLogin = async () => {
+    const isLogin = await handleLogin(inputEmail, inputPassword);
+    console.log(`Login 성공 여부: ${isLogin}`);
+    if (isLogin) {
+      navigate('/');
+    } else {
+      alert('올바르지 못한 아이디나 비밀번호입니다.');
+    }
+  }
 
   return (
     <div>

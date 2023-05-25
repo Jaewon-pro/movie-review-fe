@@ -8,12 +8,6 @@ import ReviewForm from '../components/review/ReviewForm';
 
 export default function Movie() {
   const { imdbId } = useParams();
-
-  const ReviewListsDummy = [
-    {rating: 1, body: "asdf", author: "John"},
-    {rating: 4, body: "asdf1", author: "AHH"},
-  ];
-
   const [movie, setMovie] = useState('');
   const navigate = useNavigate();
 
