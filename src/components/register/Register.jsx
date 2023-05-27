@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import axiosInstance from '../../lib/axios';
+import { useNavigate } from 'react-router-dom';
+import handleRegister from '../../api/handleRegister';
 
 function Register() {
   const [inputUsername, setInputUsername] = useState('');
   const [inputEmail, setInputId] = useState('');
   const [inputPassword, setInputPw] = useState('');
+
+  const navigate = useNavigate();
 
 	const handleInputUsername = (e) => {
     setInputUsername(e.target.value);
@@ -17,20 +20,18 @@ function Register() {
     setInputPw(e.target.value);
   }
 
-  const onClickSignUp = () => {
-    console.log('onClickSignUp');
-    axiosInstance.post('/auth/signup',
-    {
-      username: inputUsername,
-      email: inputEmail,
-      password: inputPassword
-    })
-    .then((response) => { console.log(response.data); }) 
-    .catch((response) => { console.log(response) });
+  const onClickSignUp = async () => {
+    const resultData = await handleRegister(inputUsername, inputEmail, inputPassword);
+    console.log(`회원가입 성공 여부: ${resultData.isSuccessful}`);
+    if (resultData.isSuccessful) {
+      navigate('/');
+    } else {
+      alert(resultData.message);
+    }
   }
 
   return (
-    <div className='register-home'>
+    <div className='register'>
       <h2>Register</h2>
       <div>
         <label htmlFor='email'>Email : </label>

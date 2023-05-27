@@ -10,12 +10,12 @@ export default function Login() {
   const handleInputId = (e) => { setInputId(e.target.value); }
   const handleInputPw = (e) => { setInputPw(e.target.value); }
   const onClickLogin = async () => {
-    const isLogin = await handleLogin(inputEmail, inputPassword);
-    console.log(`Login 성공 여부: ${isLogin}`);
-    if (isLogin) {
+    const resultData = await handleLogin(inputEmail, inputPassword);
+    console.log(`Login 성공 여부: ${resultData.isSuccessful}`);
+    if (resultData.isSuccessful) {
       navigate('/');
     } else {
-      alert('올바르지 못한 아이디나 비밀번호입니다.');
+      alert(resultData.message);
     }
   }
 

@@ -42,7 +42,7 @@ export default function NavBar() {
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
-  });
+  }, [username]);
 
   return (
     <>
