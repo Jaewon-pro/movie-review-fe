@@ -8,6 +8,7 @@ function ShowUserMenu({ username }) {
     <>
       <p>환영합니다! {username}</p>
       <Logout />
+      <Link to="/my-profile"><p>내 프로필 보기</p></Link>
     </>
   );
 }
@@ -37,6 +38,7 @@ export default function NavBar() {
 
   return (
     <>
+      <Link to="/"><h1>무비 리뷰 서비스</h1></Link>
     {
       username
       ? <ShowUserMenu username={username}/>

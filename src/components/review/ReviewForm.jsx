@@ -54,7 +54,7 @@ export default function ReviewForm({ imdbId }) {
 
   return (
     <form className='review-form' onSubmit={submitHandler}>
-    <div className='review-rating'>
+    <div className='rating'>
       <ReviewStarLabel onChangeRating={handleRatingChange}/>
     </div>
     <div className='review-table'>
