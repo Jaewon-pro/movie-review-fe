@@ -12,7 +12,7 @@ function ReviewStarLabel({ onChangeRating }) {
   const renderArrayElements = myArray.map((element, index) => (
     <label key={index}>
       <input type="radio" name="stars" value={element} onChange={onChangeRating}/>
-      <ReviewStar key={index} maxCount={element} />
+      <ReviewStar key={"R"+index} maxCount={element} />
     </label>
   ));
   return <>{renderArrayElements}</>;
@@ -47,16 +47,17 @@ export default function ReviewForm({ imdbId }) {
       .post('/reviews', body)
       .then((res) => {
         console.log(res)
+
       })
       .catch((res) => { console.log(res) });
   }
 
   return (
-    <form className='review' onSubmit={submitHandler}>
-    <div className='rating'>
+    <form className='review-form' onSubmit={submitHandler}>
+    <div className='review-rating'>
       <ReviewStarLabel onChangeRating={handleRatingChange}/>
     </div>
-    <div className='review-body'>
+    <div className='review-table'>
       <table>
       <tbody>
         <tr>

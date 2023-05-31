@@ -1,7 +1,5 @@
 import axiosInstance from "../lib/axios";
 
-
-
 const handleRegister = async (username, email, password) => {
   const result = {
     "isSuccessful": false,

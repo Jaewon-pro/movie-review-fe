@@ -2,7 +2,7 @@ import '../components/app/App.css';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import NavBar from '../components/NavBar/NavBar';
+import NavBar from '../components/navBar/NavBar';
 import { RoutesInfo } from './RoutesInfo';
 
 function App() {

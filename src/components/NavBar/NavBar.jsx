@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Logout from '../login/Logout';
+import setAuthorizationToken from '../../api/setAuthorization';
 
 function ShowUserMenu({ username }) {
   return (
@@ -23,26 +24,16 @@ function ShowAuthMenu() {
 export default function NavBar() {
   const [username, setUsername] = useState('');
 
-  const handleStorageChange = (event) => {
-    console.log('Storage changed:', event.key, event.newValue);
-    if (event.key === 'username') {
-      console.log("!!!!!!!!!")
-      setUsername(event.newValue);
-    }
-  };
+  useEffect(() => {
+    setAuthorizationToken();
+  }, []);
 
   useEffect(() => {
     const storedUsername = sessionStorage.getItem('username');
     if (storedUsername) {
       setUsername(storedUsername);
     }
-
-    window.addEventListener('storage', handleStorageChange);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, [username]);
+  });
 
   return (
     <>

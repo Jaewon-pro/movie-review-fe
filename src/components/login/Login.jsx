@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import handleLogin from '../../api/handleLogin';
 
 export default function Login() {
   const [inputEmail, setInputId] = useState('');
   const [inputPassword, setInputPw] = useState('');
-  const navigate = useNavigate();
 
   const handleInputId = (e) => { setInputId(e.target.value); }
   const handleInputPw = (e) => { setInputPw(e.target.value); }
@@ -13,7 +11,7 @@ export default function Login() {
     const resultData = await handleLogin(inputEmail, inputPassword);
     console.log(`Login 성공 여부: ${resultData.isSuccessful}`);
     if (resultData.isSuccessful) {
-      navigate('/');
+      window.location.replace("/");
     } else {
       alert(resultData.message);
     }

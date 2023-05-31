@@ -25,7 +25,7 @@ const handleLogin = async (email, password) => {
   .catch((response) => {
     console.log(response.response);
     result.isSuccessful = false;
-    result.message = response.response.data.body.detail;
+    result.message = response.response.data.detail;
     return result;
   });
 }
