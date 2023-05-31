@@ -24,6 +24,7 @@ function Register() {
     const resultData = await handleRegister(inputUsername, inputEmail, inputPassword);
     console.log(`회원가입 성공 여부: ${resultData.isSuccessful}`);
     if (resultData.isSuccessful) {
+      alert("회원가입 성공!" + resultData.message);
       navigate('/');
     } else {
       alert(resultData.message);

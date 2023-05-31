@@ -14,9 +14,9 @@ const handleRegister = async (username, email, password) => {
     password: password
   })
   .then((response) => {
-    console.log(response.response.data);
+    console.log(response);
     result.isSuccessful = true;
-    result.message = response.response.data;
+    result.message = response.data.message;
     return result;
   })
   .catch((response) => {
