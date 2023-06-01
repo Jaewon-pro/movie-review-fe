@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 
 function ReviewInfo({review}) {
   const map1 = new Map(Object.entries(review));
+  // 삭제하는 버튼 필요
   return (
     <div className='review-information'>
       <p>평점: {map1.get("rating")} 내용: {map1.get("body")} 작성자: {map1.get("authorUsername")}</p>
+      <input type='button' /> 
     </div>
   );
 }
 
-export default function ReviewLists({objectReviewLists}) {
+export default function ReviewLists( {objectReviewLists} ) {
   const [reviewLists, setReviewLists] = useState([]);
 
   useEffect(() => {
