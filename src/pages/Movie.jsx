@@ -31,10 +31,6 @@ export default function Movie() {
       });
   }, []);
 
-  // useEffect(() => { // 다른 영화 불러오는 경우
-  //   if ()
-  // });
-
   console.log(movie.title + '불러옴');
 
   return (
