@@ -1,28 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../lib/axios';
 
-export default function DeleteReviewButton( {reviewId} ) { // 삭제하는 버튼
-  console.log(reviewId.timestamp);
+export default function DeleteReviewButton( {reviewAuthorUsername, createdAt} ) { // 삭제하는 버튼
+  const navigate = useNavigate();
   
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('Delete button!');
-
-    //const reviewId = '';
+    console.log('Delete button!' + reviewAuthorUsername + createdAt);
   
     axiosInstance
-      .delete(`/reviews/${objectId}`)
+      .delete(`/reviews/${reviewAuthorUsername}/${createdAt}`)
       .then((res) => {
         console.log(res);
         alert('삭제되었습니다.');
-        window.location.replace("/");
+        navigate('/');
+        // window.location.reload();
       })
-      .catch((res) => { console.log(res) });
+      .catch((res) => {
+        alert('삭제에 실패했습니다.' + res);
+        console.log(res);
+      });
   }
 
   return (
     <form className='review-deleting-form' onSubmit={submitHandler}>
-      <button value={"삭제"}/>
+      <button>삭제하기</button>
     </form>
   );
 }

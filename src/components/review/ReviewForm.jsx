@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axiosInstance from '../../lib/axios';
+import { useNavigate } from 'react-router-dom';
 
 function ReviewStar({ maxCount }) {
   return (
@@ -19,8 +20,9 @@ function ReviewStarLabel({ onChangeRating }) {
 }
 
 export default function ReviewForm({ imdbId }) {
+  const navigate = useNavigate();
   const [inputReviewBody, setInputReviewBody] = useState('');
-  const [inputRating, setInputRating] = useState('');
+  const [inputRating, setInputRating] = useState(0);
 
   const handleInputReviewBody = (e) => { setInputReviewBody(e.target.value); }
   const handleRatingChange = (e) => { setInputRating(e.target.value); }
@@ -46,8 +48,8 @@ export default function ReviewForm({ imdbId }) {
     axiosInstance
       .post('/reviews', body)
       .then((res) => {
-        console.log(res)
-
+        console.log(res);
+        navigate('/');
       })
       .catch((res) => { console.log(res) });
   }

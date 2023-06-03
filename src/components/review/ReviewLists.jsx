@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import DeleteReviewButton from './ReviewDeletingForm';
 
-function ReviewInfo({review}) {
+function ReviewInfo( {review} ) {
   const map1 = new Map(Object.entries(review));
   const username = sessionStorage.getItem('username');
+  
   return (
     <div className='review-information'>
       <p>평점: {map1.get("rating")} 내용: {map1.get("body")} 작성자: {map1.get("authorUsername")}</p>
       {map1.get("authorUsername") === username
-        ? <DeleteReviewButton reviewId={map1.get("id")}/>
+        ? <DeleteReviewButton reviewAuthorUsername={map1.get("authorUsername")} createdAt={map1.get("createdAt")}/>
         : <></>
       }
     </div>
