@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import DeleteReviewButton from './ReviewDeletingForm';
+import ReviewUpdateButton from './ReviewUpdateButton';
+import ReviewDeleteButton from './ReviewDeleteButton';
 
 function ReviewInfo( {review} ) {
   const map1 = new Map(Object.entries(review));
@@ -9,7 +10,10 @@ function ReviewInfo( {review} ) {
     <div className='review-information'>
       <p>평점: {map1.get("rating")} 내용: {map1.get("body")} 작성자: {map1.get("authorUsername")}</p>
       {map1.get("authorUsername") === username
-        ? <DeleteReviewButton reviewAuthorUsername={map1.get("authorUsername")} createdAt={map1.get("createdAt")}/>
+        ? <>
+            <ReviewUpdateButton review={map1}/>
+            <ReviewDeleteButton reviewAuthorUsername={map1.get("authorUsername")} createdAt={map1.get("createdAt")}/>
+          </>
         : <></>
       }
     </div>
