@@ -29,7 +29,7 @@ export default function Movie() {
         navigate('/');
         console.log("실패"+error);
       });
-  }, []);
+  }, [navigate, imdbId]);
 
   console.log(movie.title + '불러옴');
 

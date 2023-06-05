@@ -7,6 +7,7 @@ import NotFound from "../components/notFound/NotFound";
 import Login from "../components/login/Login";
 import Register from "../components/register/Register";
 import MyProfile from "./MyProfile";
+import UserProfile from "./UserProfile";
 
 export function RoutesInfo() {
   return (
@@ -17,6 +18,7 @@ export function RoutesInfo() {
         <Route path="/register" element={<Register />} />
         <Route path="/movies/:imdbId" element={<Movie />} />
         <Route path="/my-profile" element={<MyProfile />} />
+        <Route path="/accounts/:username" element={<UserProfile />} />
         
         <Route path="*" element={<NotFound />} />
       </Routes>

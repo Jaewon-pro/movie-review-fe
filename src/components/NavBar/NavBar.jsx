@@ -27,14 +27,11 @@ export default function NavBar() {
 
   useEffect(() => {
     setAuthorizationToken();
-  }, []);
-
-  useEffect(() => {
     const storedUsername = sessionStorage.getItem('username');
     if (storedUsername) {
       setUsername(storedUsername);
     }
-  });
+  }, []);
 
   return (
     <>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReviewUpdateButton from './ReviewUpdateButton';
 import ReviewDeleteButton from './ReviewDeleteButton';
+import { Link } from 'react-router-dom';
 
 function ReviewInfo( {review} ) {
   const map1 = new Map(Object.entries(review));
@@ -8,7 +9,8 @@ function ReviewInfo( {review} ) {
   
   return (
     <div className='review-information'>
-      <p>평점: {map1.get("rating")} 내용: {map1.get("body")} 작성자: {map1.get("authorUsername")}</p>
+      <p>평점: {map1.get("rating")} 내용: {map1.get("body")} </p>
+      <Link to={`/accounts/${map1.get("authorUsername")}`}>작성자: {map1.get("authorUsername")}</Link>
       {map1.get("authorUsername") === username
         ? <>
             <ReviewUpdateButton review={map1}/>
