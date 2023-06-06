@@ -8,6 +8,7 @@ import Login from "../components/login/Login";
 import Register from "../components/register/Register";
 import MyProfile from "./MyProfile";
 import UserProfile from "./UserProfile";
+import MovieList from "./MovieList";
 
 export function RoutesInfo() {
   return (
@@ -16,6 +17,7 @@ export function RoutesInfo() {
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register />} />
+        <Route path="/movies" element={<MovieList />} />
         <Route path="/movies/:imdbId" element={<Movie />} />
         <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/accounts/:username" element={<UserProfile />} />

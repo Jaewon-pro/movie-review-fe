@@ -41,8 +41,9 @@ export default function NavBar() {
       ? <ShowUserMenu username={username}/>
       : <ShowAuthMenu />
     }
-      <Link to="/movies/123"><p>Movie123</p></Link>
-      <Link to="/movies/tt1630029"><p>movie 아바타</p></Link>
+      <Link to="/movies">전체 영화 목록 보기</Link>
+      <Link to="/movies/123"><p>Movie123 테스트용-없는 영화</p></Link>
+      <Link to="/movies/tt1630029"><p>아바타:물의 길 테스트용-있는 영화</p></Link>
     </>
   );
 }

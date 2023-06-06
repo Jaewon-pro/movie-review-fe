@@ -14,17 +14,11 @@ export default function Movie() {
   useEffect(() => {
       axiosInstance
       .get(`/movies/${imdbId}`)
-      .then(function(response) {
-        if (response.status !== 200) {
-          alert(response.data.codeDetail);
-          navigate('/');
-          console.log("실패"+response.data);
-          return;
-        }
-        setMovie(response.data);
-        console.log("성공"+response.status);
+      .then((res) => {
+        setMovie(res.data);
+        console.log("성공"+res.status);
       })
-      .catch(function(error) {
+      .catch((error) => {
         alert("올바르지 않은 접근입니다.");
         navigate('/');
         console.log("실패"+error);
@@ -35,7 +29,7 @@ export default function Movie() {
 
   return (
     <div className='movie'>
-      <MovieInfo title={movie.title} poster={movie.poster} genres={movie.genres}/>
+      <MovieInfo title={movie.title} poster={movie.poster} genres={movie.genres} imdbId={movie.imdbId}/>
       <ReviewForm imdbId={imdbId}/>
       <ReviewLists objectReviewLists={movie.reviewIds}/>
     </div>

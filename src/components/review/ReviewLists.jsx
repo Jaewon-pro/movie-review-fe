@@ -6,9 +6,8 @@ import { Link } from 'react-router-dom';
 function ReviewInfo( {review} ) {
   const map1 = new Map(Object.entries(review));
   const username = sessionStorage.getItem('username');
-  
   return (
-    <div className='review-information'>
+    <div className='review-information' key={"Re"+map1.get("id")}>
       <p>평점: {map1.get("rating")} 내용: {map1.get("body")} </p>
       <Link to={`/accounts/${map1.get("authorUsername")}`}>작성자: {map1.get("authorUsername")}</Link>
       {map1.get("authorUsername") === username

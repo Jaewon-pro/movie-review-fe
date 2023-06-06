@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axiosInstance from '../../lib/axios';
 import { useNavigate } from 'react-router-dom';
+import "./ReviewForm.css";
 
 function ReviewStar({ maxCount }) {
   return (
@@ -13,7 +14,7 @@ function ReviewStarLabel({ onChangeRating }) {
   const renderArrayElements = myArray.map((element, index) => (
     <label key={index}>
       <input type="radio" name="stars" value={element} onChange={onChangeRating}/>
-      <ReviewStar key={"R"+index} maxCount={element} />
+      <ReviewStar key={"S"+index} maxCount={element} />
     </label>
   ));
   return <>{renderArrayElements}</>;
