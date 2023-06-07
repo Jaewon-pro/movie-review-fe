@@ -56,25 +56,25 @@ export default function ReviewForm({ imdbId }) {
   }
 
   return (
-    <form className='review-form' onSubmit={submitHandler}>
+    <form id='review-form' onSubmit={submitHandler}>
       <div className='rating'>
         <ReviewStarLabel onChangeRating={handleRatingChange}/>
       </div>
-      <div className='review-table'>
-        <table>
-        <tbody>
-          <tr>
+      <div>
+        <table id='review-table'>
+          <tbody>
+            <tr>
               <th>내용</th>
               <td><textarea
                 placeholder="여기에 입력하세요"
                 value={inputReviewBody}
                 onChange={handleInputReviewBody}
               ></textarea></td>
-          </tr>
-          <tr>
+            </tr>
+            <tr>
               <td></td>
-              <td><input type="submit" value={"작성하기"}/></td>
-          </tr>
+              <td><input type="submit" value={"작성하기"} /></td>
+            </tr>
           </tbody>
         </table>
       </div>

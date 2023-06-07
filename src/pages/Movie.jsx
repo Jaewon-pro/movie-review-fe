@@ -12,24 +12,23 @@ export default function Movie() {
   const navigate = useNavigate();
 
   useEffect(() => {
-      axiosInstance
-      .get(`/movies/${imdbId}`)
-      .then((res) => {
-        setMovie(res.data);
-        console.log("성공"+res.status);
-      })
-      .catch((error) => {
-        alert("올바르지 않은 접근입니다.");
-        navigate('/');
-        console.log("실패"+error);
-      });
-  }, [navigate, imdbId]);
+    axiosInstance
+    .get(`/movies/${imdbId}`)
+    .then((res) => {
+      setMovie(res.data);
+      console.log(res.data.title + ": 로딩 성공("+res.status);
+    })
+    .catch((error) => {
+      alert("올바르지 않은 접근입니다.");
+      navigate('/');
+      console.log("실패"+error);
+    });
 
-  console.log(movie.title + '불러옴');
+  }, [navigate, imdbId]);
 
   return (
     <div className='movie'>
-      <MovieInfo title={movie.title} poster={movie.poster} genres={movie.genres} imdbId={movie.imdbId}/>
+      <MovieInfo movie={movie}/>
       <ReviewForm imdbId={imdbId}/>
       <ReviewLists objectReviewLists={movie.reviewIds}/>
     </div>

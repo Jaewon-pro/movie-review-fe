@@ -29,7 +29,7 @@ export default function MovieList() {
       {movieList.map((movie) => {
         return (
           <>
-            <MovieInfo title={movie.title} poster={movie.poster} genres={movie.genres} imdbId={movie.imdbId}/>
+            <MovieInfo movie={movie} key={movie.imdbId}/>
           </>
         );
       })}
