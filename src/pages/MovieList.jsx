@@ -13,12 +13,12 @@ export default function MovieList() {
       .get(`/movies`)
       .then((res) => {
         setMovieList(res.data);
-        console.log("성공"+res.status);
+        console.log("성공" + res.status);
       })
       .catch((error) => {
         alert("올바르지 않은 접근입니다.");
         navigate('/');
-        console.log("실패"+error);
+        console.log("실패" + error);
       });
   }, [navigate]);
 
@@ -27,11 +27,7 @@ export default function MovieList() {
   return (
     <div className='movie-list'>
       {movieList.map((movie) => {
-        return (
-          <>
-            <MovieInfo movie={movie} key={movie.imdbId}/>
-          </>
-        );
+        return <MovieInfo movie={movie} key={movie.imdbId}/>;
       })}
     </div>
   );
