@@ -7,10 +7,6 @@ function MovieGenres({ genres }) {
     return <></>;
   }
 
-  {/* {movie.genres.map((genre) => {
-    return (<p key={movie.imdbId + genre}>{genre}</p>);
-  })} */}
-
   return (
     <>{genres.join(', ')}</>
   );
