@@ -23,7 +23,7 @@ const handleLogin = async (email, password) => {
     return result;
   })
   .catch((response) => {
-    console.log(response.response);
+    console.log("ERROR: "+response.response);
     result.isSuccessful = false;
     result.message = response.response.data.detail;
     return result;
