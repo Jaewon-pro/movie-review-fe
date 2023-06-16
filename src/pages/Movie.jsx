@@ -5,6 +5,7 @@ import axiosInstance from '../lib/axios';
 import MovieInfo from '../components/movie/MovieInfo';
 import ReviewLists from '../components/review/ReviewLists';
 import ReviewForm from '../components/review/ReviewForm';
+import postReview from '../api/postReview';
 
 export default function Movie() {
   const { imdbId } = useParams();
@@ -29,7 +30,7 @@ export default function Movie() {
   return (
     <div className='movie'>
       <MovieInfo movie={movie}/>
-      <ReviewForm imdbId={imdbId}/>
+      <ReviewForm imdbId={imdbId} onSubmitHandler={postReview}/>
       <ReviewLists objectReviewLists={movie.reviewIds}/>
     </div>
   );

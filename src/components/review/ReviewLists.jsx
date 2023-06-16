@@ -3,7 +3,7 @@ import ReviewUpdateButton from './ReviewUpdateButton';
 import ReviewDeleteButton from './ReviewDeleteButton';
 import { Link } from 'react-router-dom';
 
-function ReviewInfo( {review} ) {
+function ReviewInfo({ review }) {
   const map1 = new Map(Object.entries(review));
   const username = sessionStorage.getItem('username');
   return (
@@ -21,7 +21,7 @@ function ReviewInfo( {review} ) {
   );
 }
 
-export default function ReviewLists( {objectReviewLists} ) {
+export default function ReviewLists({ objectReviewLists }) {
   const [reviewLists, setReviewLists] = useState([]);
 
   useEffect(() => {

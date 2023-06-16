@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import axiosInstance from '../../lib/axios';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./ReviewForm.css";
 
@@ -20,10 +19,22 @@ function ReviewStarLabel({ onChangeRating }) {
   return <>{renderArrayElements}</>;
 }
 
-export default function ReviewForm({ imdbId }) {
+export default function ReviewForm({ imdbId=null, review=null, onSubmitHandler }) {
   const navigate = useNavigate();
   const [inputReviewBody, setInputReviewBody] = useState('');
   const [inputRating, setInputRating] = useState(0);
+
+  useEffect(() => {
+    if (imdbId === null || onSubmitHandler === null) {
+      navigate('/');
+    }
+    console.log(imdbId, onSubmitHandler);
+    if (review !== null) {
+      setInputReviewBody(review.get("body"));
+      setInputRating(review.get("rating"));
+    }
+  }, [imdbId, review, onSubmitHandler, navigate]);
+
 
   const handleInputReviewBody = (e) => { setInputReviewBody(e.target.value); }
   const handleRatingChange = (e) => { setInputRating(e.target.value); }
@@ -45,14 +56,8 @@ export default function ReviewForm({ imdbId }) {
       "rating": inputRating * 2, // 10점 만점
       "imdbId": imdbId
     };
-
-    axiosInstance
-      .post('/reviews', body)
-      .then((res) => {
-        console.log(res);
-        navigate('/');
-      })
-      .catch((res) => { console.log(res) });
+    onSubmitHandler(body);
+    navigate('/');
   }
 
   return (
