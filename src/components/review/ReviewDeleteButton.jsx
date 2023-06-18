@@ -5,12 +5,12 @@ import axiosInstance from '../../lib/axios';
 export default function ReviewDeleteButton( {reviewAuthorUsername, createdAt} ) { // 삭제하는 버튼
   const navigate = useNavigate();
   
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
     console.log('Delete button!' + reviewAuthorUsername + createdAt);
   
-    return axiosInstance
+    return await axiosInstance
       .delete(`/reviews/${reviewAuthorUsername}/${createdAt}`)
       .then((res) => {
         console.log(res);
