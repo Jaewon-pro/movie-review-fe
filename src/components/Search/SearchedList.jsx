@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import SearchBar from './SearchBar';
 import axiosInstance from '../../lib/axios';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-function SearchedMovieList( {foundMovieList} ) {
+function SearchedMovieList({foundMovieList}) {
   if (foundMovieList === undefined || foundMovieList === null) {
     return (<>!!!!!!!!!!!!</>);
   }
@@ -21,32 +21,33 @@ function SearchedMovieList( {foundMovieList} ) {
 }
 
 export default function Search() {
-  const [search, setSearch] = useState(''); // 검색할 영화 제목
+  const [searchTitle, setSearchTitle] = useState(''); // 검색할 영화 제목
   const [foundMovieList, setFoundMovieList] = useState([]); // 일치하는 영화들
 
   const onChange = (e) => {
-    setSearch(e.target.value);
+    setSearchTitle(e.target.value);
   }
 
   useEffect(() => {
+    if (searchTitle === '') return;
     axiosInstance
-    .get(`/movies/title/${search}`)
-    .then((res) => {
-      console.log(res.data);
-      let list = [];
-      list.push(res.data); // 임시로 영화 한개만 찾음
-      console.log("찾을려고 한 영화: " + search + ", " + list + "!");
-      setFoundMovieList(list);
-    })
-    .catch((res) => {
-      //console.log(res);
-    });
-  }, [search]);
+      .get(`/movies/title?name=${searchTitle}`)
+      .then((res) => {
+        console.log(res.data);
+        let list = [];
+        list.push(res.data); // 임시로 영화 한개만 찾음
+        console.log("찾을려고 한 영화: " + searchTitle + ", " + list + "!");
+        setFoundMovieList(list);
+      })
+      .catch((res) => {
+        //console.log(res);
+      });
+  }, [searchTitle]);
 
   return (
     <>
-      <SearchBar value={search} onChange={onChange} />
-      <SearchedMovieList foundMovieList={foundMovieList} />
+      <SearchBar value={searchTitle} onChange={onChange}/>
+      <SearchedMovieList foundMovieList={foundMovieList}/>
     </>
   );
 }

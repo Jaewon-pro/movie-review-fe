@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 
 import Main from "./Main";
 import Movie from "./Movie";
@@ -14,15 +14,15 @@ export function RoutesInfo() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/movies" element={<MovieList />} />
-        <Route path="/movies/:imdbId" element={<Movie />} />
-        <Route path="/my-profile" element={<MyProfile />} />
-        <Route path="/accounts/:username" element={<UserProfile />} />
-        
-        <Route path="*" element={<NotFound />} />
+        <Route path="/" element={<Main/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
+        <Route path="/movies" element={<MovieList/>}/>
+        <Route path="/movies/:imdbId" element={<Movie/>}/>
+        <Route path="/me" element={<MyProfile/>}/>
+        <Route path="/accounts/:username" element={<UserProfile/>}/>
+
+        <Route path="*" element={<NotFound/>}/>
       </Routes>
     </>
   );

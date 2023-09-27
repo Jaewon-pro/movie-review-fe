@@ -31,7 +31,7 @@ export default function Movie() {
     <div className='movie'>
       <MovieInfo movie={movie}/>
       <ReviewForm imdbId={imdbId} onSubmitHandler={postReview}/>
-      <ReviewLists objectReviewLists={movie.reviewIds}/>
+      <ReviewLists movieImdbId={imdbId}/>
     </div>
   );
 }

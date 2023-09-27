@@ -16,16 +16,19 @@ const handleLogin = async (email, password) => {
     console.log(response.data);
     const type = response.data.type;
     const accessToken = response.data.accessToken;
-    setAuthorizationToken(type, accessToken);
-    sessionStorage.setItem('username', response.data.username);
+    const refreshToken = response.data.refreshToken;
+    setAuthorizationToken(type, accessToken, refreshToken);
+    sessionStorage.setItem('nickname', response.data.nickname);
+    console.log("로그인 성공!");
     result.isSuccessful = true;
     result.message = response.data.detail;
     return result;
   })
-  .catch((response) => {
-    console.log("ERROR: "+response.response);
+  .catch((error) => {
+    console.log("Login Error: " + error.response);
     result.isSuccessful = false;
-    result.message = response.response.data.detail;
+    result.message = error.response.data.detail;
+    result.message = error.response.data.detail;
     return result;
   });
 }

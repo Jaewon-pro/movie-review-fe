@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 export default function UserProfile() {
   const {username} = useParams('');
   return (
-    <Profile username={username} />
+    <Profile nickname={username} />
   );
 }
-//"proxy": "http://localhost:8080",

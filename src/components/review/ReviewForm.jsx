@@ -21,6 +21,7 @@ function ReviewStarLabel({ onChangeRating }) {
 
 export default function ReviewForm({ imdbId=null, review=null, onSubmitHandler }) {
   const navigate = useNavigate();
+  const [inputReviewTitle, setInputReviewTitle] = useState('');
   const [inputReviewBody, setInputReviewBody] = useState('');
   const [inputRating, setInputRating] = useState(0);
 
@@ -35,7 +36,7 @@ export default function ReviewForm({ imdbId=null, review=null, onSubmitHandler }
     }
   }, [imdbId, review, onSubmitHandler, navigate]);
 
-
+  const handleInputReviewTitle = (e) => { setInputReviewTitle(e.target.value); }
   const handleInputReviewBody = (e) => { setInputReviewBody(e.target.value); }
   const handleRatingChange = (e) => { setInputRating(e.target.value); }
 
@@ -52,7 +53,8 @@ export default function ReviewForm({ imdbId=null, review=null, onSubmitHandler }
     }
 
     const body = {
-      "reviewBody": inputReviewBody,
+      "title": inputReviewTitle,
+      "body": inputReviewBody,
       "rating": inputRating * 2, // 10점 만점
       "imdbId": imdbId
     };
@@ -70,7 +72,7 @@ export default function ReviewForm({ imdbId=null, review=null, onSubmitHandler }
           <tbody>
             <tr>
               <th>내용</th>
-              <td><textarea
+              <td><input placeholder={"제목"} onChange={handleInputReviewTitle}/><textarea
                 placeholder="여기에 입력하세요"
                 value={inputReviewBody}
                 onChange={handleInputReviewBody}

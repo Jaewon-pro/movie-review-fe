@@ -40,7 +40,7 @@ export default function MovieInfo({ movie }) {
         <h2>{movie.title}</h2>
         <p>개봉일: {movie.releaseDate}</p>
         <MovieGenres genres={movie.genres} key={movie.imdbId+"I"} />
-        <ReviewRatingPoint reviewList={movie.reviewIds} />
+        {/*<ReviewRatingPoint reviewList={movie.reviewIds} />*/}
       </div>
     </div>
   );
