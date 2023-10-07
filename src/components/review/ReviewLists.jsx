@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import ReviewUpdateButton from './ReviewUpdateButton';
 import ReviewDeleteButton from './ReviewDeleteButton';
 import {Link} from 'react-router-dom';
 import axiosInstance from "../../lib/axios";
+import Pagination1 from "../pagination/pagination";
 
 function ReviewInfo({review}) {
   const map1 = new Map(Object.entries(review));
@@ -25,14 +26,20 @@ function ReviewInfo({review}) {
 
 export default function ReviewLists({movieImdbId}) {
   const [reviewList, setReviewList] = useState([]);
-  const [page, setPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+
+  const setPageCallback = useCallback((idx) => {
+    setCurrentPage(idx);
+  }, [])
 
   useEffect(() => {
     if (movieImdbId === null || movieImdbId === undefined) {
       console.info("movie id is null");
     }
+    setReviewList([])
     axiosInstance
-      .get(`/reviews/${movieImdbId}?page=${page}&size=${10}&sort=createdAt,asc`)
+      .get(`/reviews/${movieImdbId}?page=${currentPage - 1}&size=${pageSize}&sort=createdAt,desc`)
       .then((res) => {
         console.log("리뷰: " + movieImdbId + res.data);
         setReviewList(res.data.data);
@@ -40,7 +47,8 @@ export default function ReviewLists({movieImdbId}) {
       .catch((error) => {
         console.error(error);
       });
-  }, [movieImdbId]);
+  }, [movieImdbId, currentPage, pageSize]);
+
 
   if (reviewList.length === 0) {
     return (
@@ -53,6 +61,9 @@ export default function ReviewLists({movieImdbId}) {
       {reviewList.map((review) => {
         return (<ReviewInfo key={review.id} review={review}/>);
       })}
+
+      <Pagination1 page={currentPage} setPage={setPageCallback} total={999999}
+                   limit={pageSize}/>
     </div>
   );
 }
