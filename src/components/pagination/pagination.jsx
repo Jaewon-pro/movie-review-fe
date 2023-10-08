@@ -13,7 +13,11 @@ function getBase(currentPage, total, sizePerOne) {
 }
 
 function getPrev(currentPage, sizePerOne) {
-  return currentPage - sizePerOne - 1
+  return currentPage - sizePerOne
+}
+
+function getNext(currentPage, sizePerOne) {
+  return currentPage + sizePerOne;
 }
 
 
@@ -25,7 +29,7 @@ export default function Pagination1({total, limit, page, setPage}) {
 
   return (
     <div className={"pagination"}>
-      <button onClick={() => setPage(getPrev(page, sizePerOneMin))} disabled={page <= sizePerOneMin / 2 + 1}>
+      <button onClick={() => setPage(getPrev(page, sizePerOneMin))} disabled={page <= sizePerOneMin}>
         &lt;
       </button>
       {Array(sizePerOneMin)
@@ -43,7 +47,7 @@ export default function Pagination1({total, limit, page, setPage}) {
             </button>
           )
         })}
-      <button onClick={() => setPage(page + sizePerOneMin)} disabled={page === numPages}>
+      <button onClick={() => setPage(getNext(page, sizePerOneMin))} disabled={page >= (numPages - sizePerOneMin)}>
         &gt;
       </button>
     </div>
